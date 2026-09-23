@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#08090a" />
+    <meta name="color-scheme" content="dark light" />
+    <!-- Replaced per route at build time (build/seo.ts) and kept in sync on navigation (src/lib/meta.ts). -->
+    <!-- meta:start -->
+    <title>Sadat Tanzim — Software Engineer</title>
+    <meta name="description" content="Sadat Tanzim is a Computer Science student at the University of Windsor and Software Engineering Intern at Glendor, building AI-powered tools and full-stack systems." />
+    <!-- meta:end -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <script>
+      // Set the theme before first paint so there's no flash. Keep in sync with src/lib/theme.ts.
+      (function () {
+        var dark = true;
+        try {
+          var saved = localStorage.getItem('theme');
+          dark = saved ? saved === 'dark' : !window.matchMedia('(prefers-color-scheme: light)').matches;
+        } catch (e) {}
+        document.documentElement.classList.toggle('dark', dark);
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#08090a' : '#f7f4ee');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>This site needs JavaScript. You can reach Sadat at tanzims@uwindsor.ca or linkedin.com/in/sadattanzim01.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

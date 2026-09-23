@@ -1,0 +1,11 @@
+# Cloudflare Pages redirects.
+#
+# SPA routing needs no rule here. With no top-level 404.html, Pages serves index.html for
+# any path that doesn't match a file, and React Router takes over.
+#
+# Don't add "/*  /index.html  200". Pages always applies _redirects rules, even when a
+# file exists, so it would shadow the per-route HTML files (about.html,
+# projects/pr-pilot.html, ...) that carry each page's title and link-preview tags.
+#
+# Add real redirects below, e.g.:
+# /cv  /resume.pdf  302
