@@ -8,7 +8,7 @@ export const site = {
    * Public URL of the deployed site, no trailing slash. Used for canonical links, Open Graph,
    * robots.txt and sitemap.xml. Update this when the custom domain is live.
    */
-  url: 'https://sadattanzim.pages.dev',
+  url: 'https://portfolio.sadattanzim06.workers.dev',
   /** Default meta description (home page and fallback). */
   description:
     'Sadat Tanzim is a Computer Science student at the University of Windsor and Software Engineering Intern at Glendor, building AI-powered tools and full-stack systems.',

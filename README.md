@@ -26,41 +26,33 @@ python3 scripts/generate-og.py
 
 (Both need Google Chrome; the first also needs `brew install webp`.)
 
-## Deploy to Cloudflare Pages
+## Deploy (Cloudflare Workers, static assets)
 
-### 1. Push to GitHub
+Live at **https://portfolio.sadattanzim06.workers.dev**. The site is a Cloudflare Worker that only serves the static files in `dist/`, configured by `wrangler.jsonc`. There's no server code.
 
-```bash
-git add -A
-git commit -m "Initial portfolio"
-git branch -M main
-git remote add origin https://github.com/sadattanzim01/portfolio.git   # create the empty repo on GitHub first
-git push -u origin main
-```
+### How it deploys
+The Worker **portfolio** is connected to `github.com/sadattanzim01/portfolio`, branch `main`. Every push runs:
 
-### 2. Create the Pages project
+| Step | Command |
+|---|---|
+| Build | `npm run build` |
+| Deploy | `npx wrangler deploy` (reads `wrangler.jsonc`) |
 
-1. Cloudflare dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
-2. Pick the repository and use these settings:
+Build variable: `NODE_VERSION` = `22` (Settings → Build → Variables and secrets).
 
-   | Setting | Value |
-   |---|---|
-   | Framework preset | Vite (or None) |
-   | Build command | `npm run build` |
-   | Build output directory | `dist` |
-   | Environment variable | `NODE_VERSION` = `22` |
+To update the site: commit and `git push`. It's live in about a minute. Build history is under the Worker's **Deployments** tab.
 
-3. **Save and Deploy.** The site goes live at `https://<project>.pages.dev`.
+### Routing
+The build writes one HTML file per route (`about.html`, `projects/pr-pilot.html`, ...) with that page's title, description and link-preview tags. `wrangler.jsonc` serves `/about` from `about.html` (`html_handling`), and falls back to `index.html` for anything else (`not_found_handling: single-page-application`), where the app shows its 404 page. `public/_headers` adds security headers and long-lived caching for hashed assets. `public/_redirects` is available for real redirects. Don't add a `/* /index.html 200` rule there, because the SPA fallback is already handled.
 
-Every push to `main` redeploys to production. Pushes to other branches get preview URLs.
-
-The build writes one HTML file per route (`about.html`, `projects/pr-pilot.html`, ...) with that page's title, description and link-preview tags. Cloudflare serves `/about` from `about.html`. Since there's no `404.html`, any other path falls back to `index.html` (Pages' built-in SPA mode), and the app shows its 404 page. That's why `public/_redirects` deliberately has **no** `/* /index.html 200` rule: Pages applies `_redirects` rules even when a file exists, so that rule would hide the per-route files. `public/_headers` adds security headers and long-lived caching for hashed assets.
+### Setting it up again from scratch
+Workers & Pages → Create application → connect GitHub → pick the repo. Use the build and deploy commands above and add the `NODE_VERSION` variable. The Worker's name must match `"name"` in `wrangler.jsonc`.
 
 ### 3. Custom domain (later)
 
 First set `url` in `src/content/site.ts` to the new domain. It's used for canonical links, Open Graph tags, `robots.txt` and `sitemap.xml`. Then:
 
-1. In the Pages project → **Custom domains** → **Set up a custom domain** → enter e.g. `sadattanzim.com`.
-2. If the domain's DNS is on Cloudflare, the record is created automatically. If not, add the `CNAME` record Cloudflare shows (pointing to `<project>.pages.dev`) at your DNS provider. An apex domain needs Cloudflare DNS or a provider that supports CNAME flattening.
+1. In the **portfolio** Worker → **Settings → Domains & Routes → Add → Custom domain** → enter e.g. `sadattanzim.com`.
+2. The domain's DNS must be on Cloudflare (add the domain to your Cloudflare account first; Cloudflare shows the nameservers to set at your registrar). The record is then created automatically.
 3. SSL is issued automatically, which usually takes a few minutes.
 4. Optional: add `www` as a second custom domain and redirect it to the apex with a Bulk Redirect rule.

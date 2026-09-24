@@ -3,6 +3,10 @@
 {
   "name": "portfolio", // must match the Worker's name in the Cloudflare dashboard
   "compatibility_date": "2026-09-01",
+  // Publish at https://portfolio.sadattanzim06.workers.dev (keeps the address on after every deploy)
+  "workers_dev": true,
+  // No per-commit preview URLs; only the live site is public
+  "preview_urls": false,
   "assets": {
     "directory": "./dist",
     // /about is served from about.html, /projects/pr-pilot from projects/pr-pilot.html
