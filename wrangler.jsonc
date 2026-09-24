@@ -1,0 +1,13 @@
+// Cloudflare Workers config: serves the static build in ./dist (no server code).
+// Workers Builds runs `npm run build`, then `npx wrangler deploy` with this file.
+{
+  "name": "portfolio", // must match the Worker's name in the Cloudflare dashboard
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    // /about is served from about.html, /projects/pr-pilot from projects/pr-pilot.html
+    "html_handling": "auto-trailing-slash",
+    // Any other path gets index.html and the app renders its 404 page
+    "not_found_handling": "single-page-application"
+  }
+}
