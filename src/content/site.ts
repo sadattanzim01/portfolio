@@ -11,20 +11,20 @@ export const site = {
   url: 'https://portfolio.sadattanzim06.workers.dev',
   /** Default meta description (home page and fallback). */
   description:
-    'Sadat Tanzim is a Computer Science student at the University of Windsor and Software Engineering Intern at Glendor, building AI-powered tools and full-stack systems.',
+    'Sadat Tanzim is a Computer Science student at the University of Windsor and Machine Learning Intern at Glendor, building AI-powered tools and full-stack systems.',
   role: 'Software Engineer',
   location: 'Windsor, ON, Canada',
   headline: 'I build AI-powered tools and full-stack systems that turn slow, manual work into software.',
   intro:
-    'Computer Science student at the University of Windsor. Currently a Software Engineering Intern at Glendor, working on privacy-preserving machine learning.',
+    'Computer Science student at the University of Windsor. Currently a Machine Learning Intern at Glendor, working on privacy-preserving machine learning.',
   /** Small status pill on the home page. Set to null to hide it. */
-  status: 'Software Engineering Intern at Glendor' as string | null,
+  status: 'Machine Learning Intern at Glendor' as string | null,
   /** Put the file at public/resume.pdf. */
   resume: '/resume.pdf',
 
   about: [
     "I'm a Computer Science (Honours) student at the University of Windsor with a minor in Mathematics. I like building software that takes a tedious, manual process and makes it automatic, whether that's an AI agent that reviews pull requests or an LLM pipeline that triages maintenance requests.",
-    "Right now I'm a Software Engineering Intern at Glendor, contributing to a federated learning initiative that applies privacy-preserving machine learning to model training. I'm also on the Embedded Software & Controls team at Formula Electric Windsor, and I coordinate projects for the University of Windsor AI Club.",
+    "Right now I'm a Machine Learning Intern at Glendor, contributing to a federated learning initiative that applies privacy-preserving machine learning to model training. I'm also on the Embedded Software & Controls team at Formula Electric Windsor, and I coordinate projects for the University of Windsor AI Club.",
     'I care about clear code, honest documentation, and shipping things people actually use.',
   ],
 } as const;

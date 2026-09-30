@@ -194,7 +194,7 @@ export const projects: Project[] = [
   {
     slug: 'intersteller-highway',
     title: 'Intersteller Highway V2',
-    type: 'personal',
+    type: 'hackathon',
     tagline: 'An interplanetary logistics engine that optimizes cargo routes between planets.',
     image: {
       src: '/images/projects/intersteller-highway.webp',

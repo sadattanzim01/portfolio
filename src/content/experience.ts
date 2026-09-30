@@ -4,7 +4,7 @@ import type { Experience } from './types.ts';
 export const experience: Experience[] = [
   {
     company: 'Glendor',
-    role: 'Software Engineering Intern',
+    role: 'Machine Learning Intern',
     location: 'Windsor, ON',
     start: '2026-09',
     end: 'present',
