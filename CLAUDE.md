@@ -1,6 +1,6 @@
 # Portfolio — project guide
 
-Personal portfolio for Sadat Tanzim. Fully static SPA: Vite + React 19 + TypeScript + Tailwind CSS v4 + Motion + React Router 7. Deployed to Cloudflare Workers (static assets, see wrangler.jsonc) at https://portfolio.sadattanzim06.workers.dev.
+Personal portfolio for Sadat Tanzim. Fully static SPA: Vite + React 19 + TypeScript + Tailwind CSS v4 + Motion + React Router 7. Deployed on Vercel at https://sadattanzim.vercel.app (primary, `vercel.json`); also mirrored on Cloudflare Workers at https://portfolio.sadattanzim06.workers.dev (`wrangler.jsonc`). Both auto-deploy on push to `main`.
 
 ## Hard rules
 

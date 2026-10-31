@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs';
 import type { Plugin } from 'vite';
 import { site } from '../src/content/site.ts';
-import { allRoutes, DEFAULT_OG_IMAGE, getMeta, renderHead } from '../src/lib/meta.ts';
+import { allRoutes, DEFAULT_OG_IMAGE, getMeta, NOT_FOUND_META, renderHead } from '../src/lib/meta.ts';
 
 const MARKERS = /<!-- meta:start -->[\s\S]*?<!-- meta:end -->/;
 
@@ -60,6 +60,14 @@ export function seo(): Plugin {
         if (route === '/') entry.source = html;
         else this.emitFile({ type: 'asset', fileName: `${route.slice(1)}.html`, source: html });
       }
+
+      // Unknown paths: Vercel serves 404.html with a 404 status, and the app renders its not-found page.
+      // (Cloudflare's single-page-application fallback serves index.html instead; both end up in the app.)
+      this.emitFile({
+        type: 'asset',
+        fileName: '404.html',
+        source: template.replace(MARKERS, `<!-- meta:start -->\n    ${renderHead(NOT_FOUND_META)}\n    <!-- meta:end -->`),
+      });
 
       this.emitFile({
         type: 'asset',
