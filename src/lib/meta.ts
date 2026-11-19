@@ -37,7 +37,7 @@ const STATIC: Record<string, { page: string | null; description: string }> = {
   },
   '/experience': {
     page: 'Experience',
-    description: `${site.name}'s experience: software engineering at Glendor, embedded software at Formula Electric Windsor, web development, and AI Club leadership.`,
+    description: `${site.name}'s experience: machine learning at Glendor, embedded software at Formula Electric Windsor, web development, and AI Club leadership.`,
   },
   '/projects': {
     page: 'Projects',

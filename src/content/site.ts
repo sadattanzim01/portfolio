@@ -24,7 +24,7 @@ export const site = {
 
   about: [
     "I'm a Computer Science (Honours) student at the University of Windsor with a minor in Mathematics. I like building software that takes a tedious, manual process and makes it automatic, whether that's an AI agent that reviews pull requests or an LLM pipeline that triages maintenance requests.",
-    "Right now I'm a Machine Learning Intern at Glendor, contributing to a federated learning initiative that applies privacy-preserving machine learning to model training. I'm also on the Embedded Software & Controls team at Formula Electric Windsor, and I coordinate projects for the University of Windsor AI Club.",
+    "Right now I'm a Machine Learning Intern at Glendor, contributing to a federated learning initiative that applies privacy-preserving machine learning to model training. I'm also on the Embedded Software & Controls team at Formula Electric Windsor, and I previously coordinated projects for the University of Windsor AI Club.",
     'I care about clear code, honest documentation, and shipping things people actually use.',
   ],
 } as const;

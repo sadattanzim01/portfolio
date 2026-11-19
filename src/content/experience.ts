@@ -46,7 +46,7 @@ export const experience: Experience[] = [
     role: 'Project Coordinator',
     location: 'Windsor, ON',
     start: '2025-02',
-    end: 'present',
+    end: '2026-08',
     highlights: [
       'Designed and co-led a PyTorch workshop for 60 students, building a tabular classification model to 92% accuracy.',
       'Mentored beginners in Python, Git, and documentation practices, translating ML concepts for non-specialists.',
