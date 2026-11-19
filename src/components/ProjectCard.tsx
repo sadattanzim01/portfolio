@@ -87,7 +87,7 @@ export function ProjectCard({
   return (
     <article
       onMouseMove={trackSpotlight}
-      className={`spotlight card group relative flex h-full overflow-hidden transition-[border-color,translate,box-shadow] duration-300 focus-within:border-accent/50 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-card-hover ${
+      className={`spotlight card group relative flex h-full overflow-hidden transition-[border-color,translate,box-shadow] duration-300 focus-within:border-accent/60 hover:-translate-y-1 hover:border-accent/60 hover:shadow-card-hover ${
         feature ? 'flex-col lg:grid lg:grid-cols-[1.45fr_1fr]' : 'flex-col'
       }`}
     >
@@ -119,7 +119,7 @@ export function ProjectCard({
         <Heading className={`${feature ? 'mt-5 text-heading' : 'mt-4 text-xl font-semibold tracking-tight'}`}>
           <Link
             to={`/projects/${project.slug}`}
-            data-cursor="view"
+            data-cursor="card"
             className="flex items-start justify-between gap-3 after:absolute after:inset-0 after:rounded-card after:content-[''] focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:-outline-offset-2 focus-visible:after:outline-accent"
           >
             {project.title}

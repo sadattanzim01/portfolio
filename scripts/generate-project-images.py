@@ -35,6 +35,7 @@ FRAMES = {
     'myadvice': {'title': None},
     'intersteller-highway': {'title': 'Intersteller Highway · Plan Trade Route'},
     'interstellar': {'title': 'Interstellar · Mission control'},
+    'lumi': {'title': 'Lumi · MuJoCo simulation'},
 }
 
 FONTS = f'''

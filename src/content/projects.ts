@@ -40,6 +40,39 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: 'lumi',
+    title: 'Lumi',
+    type: 'personal',
+    tagline: 'A live character for a 5-DOF lamp robot that sees, listens, talks, remembers, and acts on spoken goals.',
+    image: {
+      src: '/images/projects/lumi.webp',
+      small: '/images/projects/lumi-800.webp',
+      alt: 'The 5-DOF desk lamp robot rendered in the MuJoCo simulator, its shade lit and angled down',
+    },
+    problem: [
+      'A robot with a camera, a microphone and a speaker still feels like a machine unless it notices you, reacts with personality, and can actually do what you ask.',
+      'The goal was a lamp that comes alive when you look at it, holds a conversation, remembers what you show it, and carries out spoken goals about the real scene.',
+    ],
+    approach: [
+      'Split the system into two processes over a JSON WebSocket protocol: a body that owns the MuJoCo simulation and all safety limits, and a brain that owns perception, conversation, memory and goals.',
+      'Engagement uses a local face detector feeding a hysteresis state machine, so looking at the lamp works as the wake word and the mic only opens while engaged.',
+      'Speech runs locally with Whisper for speech-to-text and Piper for text-to-speech; Claude drives the conversation through a structured tool that picks words, gestures, mood and light.',
+      'Spoken goals ("shine your light on the book") run plan → act → re-observe → correct, and only succeed when a fresh camera frame confirms the lamp is really aimed at the object.',
+      'The body enforces soft joint limits, self-collision checks, velocity and acceleration profiles, and torque within the robot description\'s limits.',
+    ],
+    result: [
+      'Responds out loud a median 3.3 seconds after you stop speaking, with speech recognition and voice running fully on the laptop.',
+      'Engaged correctly in 10 of 10 scripted look/look-away trials, with a median 1.3 second response.',
+      'The goal loop caught a 24° first miss and corrected it to 2.6° before reporting success.',
+      'Runs at about a quarter of a 4-core CPU on average, sending only text and an occasional camera frame to the cloud.',
+    ],
+    tech: ['Python', 'MuJoCo', 'Claude API', 'Whisper', 'Piper TTS', 'OpenCV', 'WebSockets', 'NumPy'],
+    date: '2026-11',
+    links: {
+      repo: 'https://github.com/sadattanzim01/lamp-character',
+    },
+  },
+  {
     slug: 'interstellar',
     title: 'Interstellar',
     type: 'hackathon',

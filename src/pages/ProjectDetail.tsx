@@ -209,8 +209,7 @@ export default function ProjectDetail() {
         <Reveal className="mt-24">
           <Link
             to={`/projects/${next.slug}`}
-            data-cursor="view"
-            data-cursor-label="Next"
+            data-cursor="card"
             className="card group flex items-center gap-5 p-3 pr-6 transition-[border-color,box-shadow] duration-300 hover:border-accent/50 hover:shadow-card-hover sm:gap-8"
           >
             {/* Inner radius = card radius (20px) − padding (12px) = 8px */}

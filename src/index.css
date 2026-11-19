@@ -373,6 +373,19 @@ html.has-custom-cursor [data-magnetic] {
   scale: 1;
 }
 
+/* Project cards: a slightly larger accent ring with a soft fill; the dot stays, in accent. */
+.cursor-root[data-mode="card"] .cursor-ring {
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid var(--accent);
+  background-color: var(--accent-soft);
+}
+.cursor-root[data-mode="card"] .cursor-dot {
+  opacity: 1;
+  scale: 1;
+  background-color: var(--accent);
+}
+
 /* Paragraphs: a text caret sized to the line height. */
 .cursor-root[data-mode="text"] .cursor-ring {
   width: 2px;
@@ -382,7 +395,7 @@ html.has-custom-cursor [data-magnetic] {
   background-color: var(--accent);
 }
 
-.cursor-root:not([data-mode="default"]) .cursor-dot {
+.cursor-root:not([data-mode="default"]):not([data-mode="card"]) .cursor-dot {
   opacity: 0;
   scale: 0;
 }

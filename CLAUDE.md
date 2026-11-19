@@ -126,7 +126,7 @@ Primitives live in `src/components/ui.tsx` (`Badge`, `TextLink`, `SectionHeading
 - **Buttons:** `.btn` plus `.btn-primary` (accent; one main action per view) or `.btn-secondary`. Add `.btn-lg` for hero and section CTAs. Icon-side padding is trimmed automatically, and buttons scale down slightly on press.
 - **Icons:** one set (`components/icons.tsx`). Sizes are `ICON.sm` 14 (inline with small text), `ICON.md` 16 (buttons, body), `ICON.lg` 18 (standalone controls). → means an internal page, ↗ means an external site.
 - **Radii:** `rounded-card` 20px (cards, panels, images), `rounded-control` 12px, `rounded-chip` 6px (tags). When nesting, **inner radius = outer radius − padding**. Example: an image in a card with 12px padding gets 8px.
-- **Surfaces:** `.card` (border, elevated background, palette shadow). Hover feedback: border to accent, a 2px lift, and `shadow-card-hover`.
+- **Surfaces:** `.card` (border, elevated background, palette shadow). Hover feedback: green accent border, a 4px lift, and `shadow-card-hover`.
 - **Badges:** only for information a reader needs: In progress, Hackathon (plus event), or `context` such as Capstone. Nothing is labelled "Personal".
 - **Headlines:** specific, not generic ("AI agents, LLM pipelines, and full-stack apps", not "Things I've built"). Don't add a label above a page title that repeats the nav.
 - **Images:** `ProjectImage` shows a shimmer until the image decodes, then fades it in. Project images are Sadat's own screenshots, framed by `scripts/generate-project-images.py`. Don't replace them with anything that isn't from the actual project.
@@ -179,11 +179,12 @@ Control it from markup:
 | Attribute | Effect |
 |---|---|
 | (none) on `a`, `button`, `[role=tab]` | Ring grows and inverts what's beneath it |
-| `data-cursor="view"` | Accent disc with a label; `data-cursor-label="Open"` changes the text (default "View") |
+| `data-cursor="card"` | Slightly larger green accent ring, no label. Used on project cards and the Next-project link |
+| `data-cursor="view"` | Accent disc with a label; `data-cursor-label="Open"` changes the text (default "View"). Currently unused |
 | `data-cursor="text"` (automatic on `<p>`) | Text caret sized to the element's line height |
 | `data-magnetic` / `data-magnetic="0.45"` | Element leans toward the pointer (strength defaults to 0.3); use on primary buttons and icon links |
 
-Priority when nested: `view` > interactive > text.
+Priority when nested: `view` > `card` > interactive > text.
 
 ## Commands
 

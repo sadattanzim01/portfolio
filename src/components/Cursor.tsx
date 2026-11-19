@@ -6,6 +6,7 @@ import { motion, useMotionValue, useSpring } from 'motion/react';
  *
  * Hover behaviour is driven by the element under the pointer:
  * - `data-cursor="view"` (optionally `data-cursor-label="…"`): large accent ring with a label
+ * - `data-cursor="card"`: a slightly larger accent-green ring, no label (project cards)
  * - links, buttons, tabs: ring grows and inverts what's beneath it (mix-blend-mode: difference)
  * - `<p>` or `data-cursor="text"`: ring becomes a text caret sized to the line height
  * - `data-magnetic` (optionally `="0.4"` for strength): the element leans toward the pointer
@@ -22,7 +23,7 @@ const ACTIVE_CLASS = 'has-custom-cursor';
 const INTERACTIVE = 'a, button, [role="button"], [role="tab"], label, summary, select';
 const SPRING = { stiffness: 380, damping: 32, mass: 0.55 };
 
-type Mode = 'default' | 'link' | 'view' | 'text';
+type Mode = 'default' | 'link' | 'view' | 'card' | 'text';
 
 function subscribe(onChange: () => void) {
   const mql = window.matchMedia(ENABLED_QUERY);
@@ -42,6 +43,8 @@ function resolveMode(el: Element | null): { mode: Mode; target: HTMLElement | nu
   if (!el) return { mode: 'default', target: null };
   const view = el.closest<HTMLElement>('[data-cursor="view"]');
   if (view) return { mode: 'view', target: view };
+  const card = el.closest<HTMLElement>('[data-cursor="card"]');
+  if (card) return { mode: 'card', target: card };
   const interactive = el.closest<HTMLElement>(INTERACTIVE);
   if (interactive) return { mode: 'link', target: interactive };
   const text = el.closest<HTMLElement>('[data-cursor="text"], p');
