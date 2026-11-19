@@ -40,6 +40,37 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: 'interstellar',
+    title: 'Interstellar',
+    type: 'hackathon',
+    event: 'Hack the Nest 2026',
+    tagline: 'Mission control on a laptop, a real FPGA flight computer, and cargo routes flown on real NASA orbits.',
+    image: {
+      src: '/images/projects/interstellar.webp',
+      small: '/images/projects/interstellar-800.webp',
+      alt: "Interstellar mission control: a 3D solar system with the Sun, Mercury, Venus, Earth, Mars and Jupiter, a shuttle's transfer path, the mission date, and a 'While out of contact' sync report",
+    },
+    problem: [
+      'Deep-space missions lose radio contact, so a spacecraft has to fire its critical engine burns on its own schedule, and the fuel a trip needs changes with every launch date.',
+      'Most space simulators skip this: one program draws the planets and also decides the ship arrives. We wanted to show the real split between mission control and the flight computer, small enough to sit on a desk.',
+    ],
+    approach: [
+      'I built the NASA/JPL Horizons data cache and the Lambert-solver route search that finds the most fuel-efficient and the fastest launch options between planets.',
+      'I built the mission-control frontend in React, TypeScript and Three.js: a 3D solar system you can fly around, a From → To route picker, launch countdown, running flight calendar, and a blackout view that shows the estimated path until the real one syncs back.',
+      'The team built the shuttle computer in Verilog on a DE10-Lite FPGA, which runs the mission clock and fires the burns itself, connected through a XIAO ESP32S3 bridge to a FastAPI + WebSocket backend.',
+      'Every flight cuts the link on purpose mid-way. The board keeps flying, and key values are stored in three copies that vote to survive memory faults.',
+    ],
+    result: [
+      'Full 30-second missions completed on the real FPGA board, including the automatic mid-flight blackout.',
+      'Fault protection worked on hardware: one corrupted memory copy was outvoted and the mission completed; when all three copies disagreed, the board entered safe mode.',
+      '13 routes between Mercury, Venus, Earth, Mars and Jupiter, each independently re-flown numerically before being accepted, backed by over 400 automated backend tests.',
+    ],
+    tech: ['React', 'TypeScript', 'Three.js', 'Python', 'FastAPI', 'WebSockets', 'NumPy', 'SciPy', 'Astropy', 'Verilog', 'FPGA'],
+    date: '2026-11',
+    role: 'NASA data, orbital math & 3D frontend · team of 4',
+    links: {},
+  },
+  {
     // In progress: add problem/approach/result details, then drop `status` when it ships.
     slug: 'snaprag',
     title: 'SnapRAG',

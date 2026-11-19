@@ -34,6 +34,7 @@ FRAMES = {
     'devlens': {'title': 'DevLENS · dashboard'},
     'myadvice': {'title': None},
     'intersteller-highway': {'title': 'Intersteller Highway · Plan Trade Route'},
+    'interstellar': {'title': 'Interstellar · Mission control'},
 }
 
 FONTS = f'''
