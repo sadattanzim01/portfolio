@@ -17,8 +17,6 @@ export const site = {
   headline: 'I build AI-powered tools and full-stack systems that turn slow, manual work into software.',
   intro:
     'Computer Science student at the University of Windsor. Currently a Machine Learning Intern at Glendor, working on privacy-preserving machine learning.',
-  /** Small status pill on the home page. Set to null to hide it. */
-  status: 'Machine Learning Intern at Glendor' as string | null,
   /** Put the file at public/resume.pdf. */
   resume: '/resume.pdf',
 

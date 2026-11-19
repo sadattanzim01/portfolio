@@ -57,7 +57,7 @@ export function Header() {
           <Link to="/" className="group flex shrink-0 items-center gap-2.5">
             <span
               aria-hidden="true"
-              className={`grid size-8 place-items-center rounded-lg bg-fg font-mono text-xs font-bold text-bg transition-[background-color,color,scale] duration-300 group-hover:bg-accent group-hover:text-accent-fg ${
+              className={`grid size-8 place-items-center rounded-[0.5rem] bg-fg text-[0.8125rem] font-bold tracking-tight text-bg transition-[background-color,color,scale] duration-300 group-hover:bg-accent group-hover:text-accent-fg ${
                 compact ? 'scale-[0.875]' : ''
               }`}
             >
@@ -75,10 +75,10 @@ export function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.2 }}
-                className="truncate font-mono text-xs text-muted md:max-lg:hidden"
+                className="truncate text-sm text-muted md:max-lg:hidden"
                 aria-hidden="true"
               >
-                <span className="text-accent">/</span> {section}
+                <span className="text-subtle">·</span> {section}
               </motion.span>
             )}
           </AnimatePresence>
@@ -127,12 +127,12 @@ export function Header() {
                   data-magnetic="0.45"
                   className="grid size-9 place-items-center rounded-full text-muted transition-colors hover:text-accent"
                 >
-                  <Icon size={17} />
+                  <Icon size={18} />
                 </ExternalLink>
               );
             })}
-            <ExternalLink href={site.resume} className="btn btn-ghost ml-1 !px-3.5 !py-1.5">
-              <ResumeIcon size={15} /> Resume
+            <ExternalLink href={site.resume} className="btn btn-secondary ml-1 !py-1.5 !pl-3 !pr-3.5">
+              <ResumeIcon size={16} /> Resume
             </ExternalLink>
           </div>
           <ThemeToggle />
@@ -176,8 +176,8 @@ export function Header() {
               ))}
             </ul>
             <div className="flex items-center gap-2 px-4 pb-5 pt-3">
-              <ExternalLink href={site.resume} className="btn btn-primary">
-                <ResumeIcon size={15} /> Resume
+              <ExternalLink href={site.resume} className="btn btn-secondary">
+                <ResumeIcon size={16} /> Resume
               </ExternalLink>
               {socials.map((s) => {
                 const Icon = SOCIAL_ICONS[s.icon];
@@ -188,7 +188,7 @@ export function Header() {
                     aria-label={s.label}
                     className="grid size-10 place-items-center rounded-full border border-line text-muted"
                   >
-                    <Icon size={17} />
+                    <Icon size={18} />
                   </ExternalLink>
                 );
               })}

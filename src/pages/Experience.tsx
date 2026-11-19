@@ -2,6 +2,7 @@ import { Container } from '../components/Container';
 import { ExternalLink } from '../components/ExternalLink';
 import { ArrowUpRightIcon } from '../components/icons';
 import { PageHeader } from '../components/PageHeader';
+import { ICON } from '../components/ui';
 import { Reveal } from '../components/Reveal';
 import { TagList } from '../components/Tag';
 import { experience } from '../lib/content';
@@ -13,8 +14,8 @@ export default function Experience() {
 
   return (
     <Container className="pb-24">
-      <PageHeader eyebrow="Experience" title="Where I've worked.">
-        Internships, engineering teams, and student leadership.
+      <PageHeader title="Machine learning, embedded software, and web development">
+        Internships, a Formula SAE engineering team, and student leadership, newest first.
       </PageHeader>
 
       <ol className="relative border-l border-line">
@@ -30,23 +31,24 @@ function ExperienceItem({ e }: { e: ExperienceEntry }) {
   const ref = useSection<HTMLLIElement>(e.company);
   return (
     <li ref={ref} className="relative pb-14 pl-8 last:pb-0 sm:pl-12">
+      {/* Dot centred on the role title's first line (title is text-xl/2xl, so offset in em of that size). */}
       <span
-        className={`absolute -left-[5px] top-2 size-[9px] rounded-full ring-4 ring-bg ${
+        className={`absolute -left-[5px] top-[0.55rem] size-[9px] rounded-full ring-4 ring-bg sm:top-[0.7rem] ${
           e.end === 'present' ? 'bg-accent' : 'bg-subtle'
         }`}
         aria-hidden="true"
       />
       <Reveal className="grid gap-4 lg:grid-cols-[220px_1fr] lg:gap-10">
-        <div className="font-mono text-xs leading-6 text-muted">
-          <p>{formatRange(e.start, e.end)}</p>
-          <p className="text-subtle">{e.location}</p>
+        <div className="text-sm leading-6 lg:pt-1">
+          <p className="font-medium tabular-nums">{formatRange(e.start, e.end)}</p>
+          <p className="text-muted">{e.location}</p>
         </div>
         <div>
           <h2 className="text-xl font-semibold tracking-tight sm:text-2xl">{e.role}</h2>
-          <p className="mt-1 text-accent">
+          <p className="mt-1 font-medium text-accent">
             {e.url ? (
               <ExternalLink href={e.url} className="link-underline inline-flex items-center gap-1">
-                {e.company} <ArrowUpRightIcon size={14} />
+                {e.company} <ArrowUpRightIcon size={ICON.sm} />
               </ExternalLink>
             ) : (
               e.company
@@ -55,7 +57,7 @@ function ExperienceItem({ e }: { e: ExperienceEntry }) {
           <ul className="mt-5 space-y-2.5 text-muted">
             {e.highlights.map((h) => (
               <li key={h} className="flex gap-3 leading-relaxed">
-                <span className="mt-2.5 h-px w-3 shrink-0 bg-subtle" aria-hidden="true" />
+                <span className="mt-[0.8em] h-px w-3 shrink-0 bg-subtle" aria-hidden="true" />
                 <span className="text-pretty" data-cursor="text">{h}</span>
               </li>
             ))}

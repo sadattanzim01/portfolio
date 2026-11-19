@@ -14,13 +14,13 @@ export function Footer() {
           <p className="mt-1 text-sm text-muted">
             {site.role} · {site.location}
           </p>
-          <a href={`mailto:${emails[0]}`} className="mt-2.5 inline-block py-1.5 text-sm text-fg underline-offset-4 hover:underline">
-            {emails[0]}
+          <a href={`mailto:${emails[0]!.address}`} className="mt-2.5 inline-block py-1.5 text-sm text-fg underline-offset-4 hover:underline">
+            {emails[0]!.address}
           </a>
         </div>
 
         <nav aria-label="Footer">
-          <p className="eyebrow">Pages</p>
+          <p className="label">Pages</p>
           <ul className="mt-2 space-y-0.5 text-sm">
             {NAV_ITEMS.map((item) => (
               <li key={item.to}>
@@ -33,26 +33,26 @@ export function Footer() {
         </nav>
 
         <div>
-          <p className="eyebrow">Elsewhere</p>
+          <p className="label">Elsewhere</p>
           <ul className="mt-2 space-y-0.5 text-sm">
             {socials.map((s) => (
               <li key={s.label}>
                 <ExternalLink href={s.href} className="group inline-flex items-center gap-1 py-1.5 text-muted transition-colors hover:text-fg">
                   {s.label}
-                  <ArrowUpRightIcon size={13} className="opacity-0 transition-opacity group-hover:opacity-100" />
+                  <ArrowUpRightIcon size={14} className="text-subtle transition-[translate,color] duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg" />
                 </ExternalLink>
               </li>
             ))}
             <li>
               <ExternalLink href={site.resume} className="group inline-flex items-center gap-1 py-1.5 text-muted transition-colors hover:text-fg">
                 Resume (PDF)
-                <ArrowUpRightIcon size={13} className="opacity-0 transition-opacity group-hover:opacity-100" />
+                <ArrowUpRightIcon size={14} className="text-subtle transition-[translate,color] duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fg" />
               </ExternalLink>
             </li>
           </ul>
         </div>
       </div>
-      <div className="mx-auto max-w-6xl px-4 pb-8 font-mono text-xs text-subtle sm:px-6">
+      <div className="mx-auto max-w-6xl px-4 pb-8 text-sm text-muted tabular-nums sm:px-6">
         © {new Date().getFullYear()} {site.name}
       </div>
     </footer>

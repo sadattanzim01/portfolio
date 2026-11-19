@@ -16,5 +16,8 @@ export const socials: Social[] = [
   },
 ];
 
-/** The first address is the primary one (used for the main "Email me" buttons). */
-export const emails: string[] = ['tanzims@uwindsor.ca', 'sadattanzim06@gmail.com'];
+/** The first address is the primary one (shown in the hero and footer). `label` appears on the contact page. */
+export const emails: { address: string; label: string }[] = [
+  { address: 'tanzims@uwindsor.ca', label: 'University email' },
+  { address: 'sadattanzim06@gmail.com', label: 'Personal email' },
+];

@@ -38,11 +38,10 @@ body { background: #09090b; color: #fafafa; font-family: Inter, sans-serif; posi
         mask-image: radial-gradient(ellipse at 30% 30%, black 20%, transparent 75%); }
 .glow { position: absolute; width: 900px; height: 600px; left: -200px; top: -320px; border-radius: 50%;
         background: radial-gradient(closest-side, rgba(52,211,153,.28), transparent); }
-.eyebrow { font-family: Mono; font-size: 22px; letter-spacing: .16em; text-transform: uppercase; color: #a1a1aa; }
-.eyebrow b { color: #34d399; font-weight: 400; }
+.eyebrow { font-size: 26px; font-weight: 500; color: #34d399; }
 .foot { position: absolute; left: 80px; bottom: 64px; display: flex; align-items: center; gap: 18px; font-size: 24px; color: #a1a1aa; }
 .mark { width: 52px; height: 52px; border-radius: 12px; background: #fafafa; color: #09090b; display: grid; place-items: center;
-        font-family: Mono; font-weight: 700; font-size: 20px; }
+        font-weight: 700; font-size: 21px; letter-spacing: -.02em; }
 '''
 
 
@@ -52,10 +51,10 @@ def page(body: str, css: str = '') -> str:
 
 def default_og(name: str, role: str, headline: str) -> str:
     return page(f'''
-<div class="glow"></div><div class="dots"></div>
+<div class="glow"></div>
 <div style="position:absolute;left:80px;top:96px;right:80px">
-  <p class="eyebrow"><b>/</b> {html.escape(role)} · Windsor, ON</p>
-  <h1 style="font-size:112px;font-weight:600;letter-spacing:-.04em;line-height:1;margin-top:28px">{html.escape(name)}<span style="color:#34d399">.</span></h1>
+  <p class="eyebrow">{html.escape(role)} · Windsor, ON</p>
+  <h1 style="font-size:112px;font-weight:600;letter-spacing:-.04em;line-height:1;margin-top:28px">{html.escape(name)}</h1>
   <p style="font-size:34px;line-height:1.4;color:#a1a1aa;margin-top:32px;max-width:900px">{html.escape(headline)}</p>
 </div>
 <div class="foot"><div class="mark">ST</div>Projects · Experience · Contact</div>
@@ -64,9 +63,9 @@ def default_og(name: str, role: str, headline: str) -> str:
 
 def project_og(title: str, tagline: str, kind: str, cover: str, name: str) -> str:
     return page(f'''
-<div class="glow"></div><div class="dots"></div>
+<div class="glow"></div>
 <div style="position:absolute;left:80px;top:88px;width:520px">
-  <p class="eyebrow"><b>/</b> {html.escape(kind)} project</p>
+  <p class="eyebrow">{html.escape(kind)} project</p>
   <h1 style="font-size:72px;font-weight:600;letter-spacing:-.035em;line-height:1.02;margin-top:26px">{html.escape(title)}</h1>
   <p style="font-size:28px;line-height:1.45;color:#a1a1aa;margin-top:26px">{html.escape(tagline)}</p>
 </div>
@@ -79,7 +78,7 @@ def project_og(title: str, tagline: str, kind: str, cover: str, name: str) -> st
 def icon(size: int) -> str:
     return f'''<!doctype html><html><head><meta charset="utf-8"><style>{FONTS}
 * {{ margin:0 }} html, body {{ width:{size}px; height:{size}px; overflow:hidden; background:#09090b; }}
-body {{ display:grid; place-items:center; font-family:Mono; font-weight:700; font-size:{round(size*0.42)}px; color:#34d399; letter-spacing:-.02em; }}
+body {{ display:grid; place-items:center; font-family:Inter; font-weight:700; font-size:{round(size*0.42)}px; color:#34d399; letter-spacing:-.02em; }}
 </style></head><body>ST</body></html>'''
 
 

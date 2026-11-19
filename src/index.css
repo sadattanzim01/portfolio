@@ -15,7 +15,12 @@
  */
 @theme inline {
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Radii. Nested rule: inner radius = outer radius - padding between them. */
+  --radius-card: 1.25rem; /* 20px: cards, panels, images */
+  --radius-control: 0.75rem; /* 12px: things inside a card with 8px padding */
+  --radius-chip: 0.375rem; /* 6px: tags */
 
   --color-bg: var(--bg);
   --color-surface: var(--surface);
@@ -36,12 +41,12 @@
   --surface: #efebe3;
   --elevated: #fffdf8;
   --fg: #1c1917;
-  --muted: #57534e;
-  --subtle: #6f6861;
+  --muted: #45403b;
+  --subtle: #5f5852;
   --line: #e3ddd2;
-  --accent: #047857;
+  --accent: #03684b;
   --accent-fg: #ffffff;
-  --accent-soft: rgb(4 120 87 / 0.1);
+  --accent-soft: rgb(3 104 75 / 0.1);
   --dot: #d6cfc2;
   --glow-a: rgb(245 158 11 / 0.16);
   --glow-b: rgb(16 185 129 / 0.14);
@@ -56,8 +61,8 @@
   --surface: #0f1112;
   --elevated: #151819;
   --fg: #f4f4f5;
-  --muted: #a1a1aa;
-  --subtle: #83878c;
+  --muted: #babac2;
+  --subtle: #9599a0;
   --line: #24282a;
   --accent: #34d399;
   --accent-fg: #022c22;
@@ -77,8 +82,8 @@
   --surface: #132821;
   --elevated: #173028;
   --fg: #ecfdf5;
-  --muted: #a7c4b8;
-  --subtle: #86a89b;
+  --muted: #bfd8cd;
+  --subtle: #9bbcae;
   --line: #24443a;
   --accent: #6ee7b7;
   --accent-fg: #052e22;
@@ -113,6 +118,17 @@
     font-feature-settings: "cv11", "ss01";
   }
 
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
   ::selection {
     background: var(--accent-soft);
     color: var(--fg);
@@ -125,13 +141,6 @@
 }
 
 @layer components {
-  /* Dotted grid backdrop, faded out toward the edges. */
-  .bg-dots {
-    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
-    background-size: 22px 22px;
-    mask-image: radial-gradient(ellipse at 50% 0%, black 20%, transparent 70%);
-  }
-
   /* Two-tone atmosphere behind heroes; colors come from the palette (--glow-a / --glow-b). */
   .bg-glow {
     background:
@@ -159,19 +168,92 @@
     opacity: 1;
   }
 
-  .btn {
-    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-200;
+  /* ---- Type scale (sans only). Use these instead of ad-hoc text sizes for headings. ---- */
+  .text-display {
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    font-weight: 600;
+    /* Optical alignment: pull large glyphs left so their stems line up with body text. */
+    margin-left: -0.05em;
   }
-  /* Use together: class="btn btn-primary" / class="btn btn-ghost" */
-  .btn-primary {
-    @apply bg-fg text-bg hover:bg-accent hover:text-accent-fg;
+  .text-title {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    margin-left: -0.03em;
   }
-  .btn-ghost {
-    @apply border border-line text-fg hover:border-accent hover:text-accent;
+  .text-heading {
+    font-size: clamp(1.75rem, 3.4vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    font-weight: 600;
+  }
+  .text-lead {
+    font-size: clamp(1.125rem, 1.6vw, 1.3125rem);
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  /* Small sentence-case label for metadata and groupings (replaces the old mono uppercase eyebrow). */
+  .label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--muted);
   }
 
-  .eyebrow {
-    @apply font-mono text-xs uppercase tracking-[0.18em] text-muted;
+  /* ---- Buttons: one primary (accent) per view, secondary for everything else. ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease,
+      scale 120ms ease;
+  }
+  /* Optical padding: an icon at either end reads as part of the edge, so trim that side. */
+  .btn:has(> svg:first-child) {
+    padding-left: 1rem;
+  }
+  .btn:has(> svg:last-child) {
+    padding-right: 1rem;
+  }
+  /* Press feedback */
+  .btn:active {
+    scale: 0.97;
+  }
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+  .btn-primary {
+    @apply bg-accent text-accent-fg shadow-[0_1px_0_rgb(255_255_255/0.15)_inset,0_6px_20px_-8px_var(--accent)];
+  }
+  .btn-primary:hover {
+    background-color: color-mix(in oklab, var(--accent), var(--fg) 12%);
+  }
+  .btn-secondary {
+    @apply border border-line bg-elevated text-fg hover:border-subtle;
+  }
+
+  /* ---- Surfaces ---- */
+  .card {
+    @apply rounded-card border border-line bg-elevated shadow-card;
+  }
+
+  /* ---- Loading state for images: shimmer until the image has decoded. ---- */
+  .img-loading {
+    background: linear-gradient(100deg, var(--surface) 30%, color-mix(in oklab, var(--surface), var(--fg) 6%) 50%, var(--surface) 70%);
+    background-size: 300% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: 0 0;
+    }
   }
 
   .link-underline {
@@ -246,11 +328,8 @@ html.has-custom-cursor [data-magnetic] {
 }
 
 .cursor-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--accent-fg);
   opacity: 0;
   scale: 0.5;

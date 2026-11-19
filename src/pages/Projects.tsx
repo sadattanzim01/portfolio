@@ -5,6 +5,7 @@ import { Container } from '../components/Container';
 import { EmptyState } from '../components/EmptyState';
 import { AwardIcon } from '../components/icons';
 import { PageHeader } from '../components/PageHeader';
+import { ICON } from '../components/ui';
 import { ProjectCard } from '../components/ProjectCard';
 import { PROJECT_TYPE_LABEL, projects } from '../lib/content';
 import { ease } from '../lib/motion';
@@ -29,8 +30,9 @@ export default function Projects() {
 
   return (
     <Container className="pb-24">
-      <PageHeader eyebrow="Projects" title="Things I've built.">
-        Personal projects and hackathon builds, from AI agents to full-stack dashboards.
+      <PageHeader title="AI agents, LLM pipelines, and full-stack apps">
+        {projects.length} projects, from an AI code reviewer that comments on pull requests to an interplanetary route
+        planner. Filter by personal builds or hackathons.
       </PageHeader>
 
       <LayoutGroup>
@@ -57,7 +59,7 @@ export default function Projects() {
                   />
                 )}
                 <span className="relative">
-                  {f.label} <span className="font-mono text-xs">{count(f.value)}</span>
+                  {f.label} <span className="ml-0.5 text-xs tabular-nums">{count(f.value)}</span>
                 </span>
               </button>
             );
@@ -66,11 +68,11 @@ export default function Projects() {
 
         <div id="project-grid" aria-live="polite" className="mt-10">
           {visible.length === 0 ? (
-            <EmptyState icon={<AwardIcon size={20} />} title={`No ${PROJECT_TYPE_LABEL[filter as ProjectType].toLowerCase()} projects yet`}>
+            <EmptyState icon={<AwardIcon size={ICON.lg} />} title={`No ${PROJECT_TYPE_LABEL[filter as ProjectType].toLowerCase()} projects yet`}>
               New builds are on the way. In the meantime, have a look at the other projects.
             </EmptyState>
           ) : (
-            <motion.ul layout className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <motion.ul layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <AnimatePresence mode="popLayout" initial={false}>
                 {visible.map((p, i) => (
                   <motion.li

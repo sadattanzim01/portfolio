@@ -113,9 +113,25 @@ Roles with `end: 'present'` also appear in the "Currently" card on the home page
 ### Other edits
 
 - **Resume:** replace `public/resume.pdf` (keep the filename, or update `site.resume`).
-- **Status pill / headline / bio / skills:** `src/content/site.ts`. Set `status: null` to hide the pill.
+- **Headline / bio / skills:** `src/content/site.ts`. Current roles in the hero come from experience entries with `end: 'present'`.
 - **Accent color:** `--accent` (and `--accent-soft`) in both palette blocks in `src/index.css`. Use a darker shade in the light palette so it keeps contrast.
 - **New page:** add `src/pages/X.tsx`, a route in `src/App.tsx`, and an entry in `src/lib/nav.ts`.
+
+## Design system
+
+Primitives live in `src/components/ui.tsx` (`Badge`, `TextLink`, `SectionHeading`, `ProjectImage`, `ICON`) and the `@layer components` block of `src/index.css`. Compose these instead of restyling.
+
+- **Type scale (sans only):** `.text-display` (hero name), `.text-title` (page h1), `.text-heading` (section h2), `.text-lead` (intro paragraphs), `.label` (small sentence-case metadata). No mono, no italics, no uppercase-tracked eyebrows. Headings wrap with `text-wrap: balance`; large ones carry a small negative left margin for optical alignment.
+- **Numbers:** dates, counts, years and step numbers use `tabular-nums`.
+- **Buttons:** `.btn` plus `.btn-primary` (accent; one main action per view) or `.btn-secondary`. Add `.btn-lg` for hero and section CTAs. Icon-side padding is trimmed automatically, and buttons scale down slightly on press.
+- **Icons:** one set (`components/icons.tsx`). Sizes are `ICON.sm` 14 (inline with small text), `ICON.md` 16 (buttons, body), `ICON.lg` 18 (standalone controls). → means an internal page, ↗ means an external site.
+- **Radii:** `rounded-card` 20px (cards, panels, images), `rounded-control` 12px, `rounded-chip` 6px (tags). When nesting, **inner radius = outer radius − padding**. Example: an image in a card with 12px padding gets 8px.
+- **Surfaces:** `.card` (border, elevated background, palette shadow). Hover feedback: border to accent, a 2px lift, and `shadow-card-hover`.
+- **Badges:** only for information a reader needs: In progress, Hackathon (plus event), or `context` such as Capstone. Nothing is labelled "Personal".
+- **Headlines:** specific, not generic ("AI agents, LLM pipelines, and full-stack apps", not "Things I've built"). Don't add a label above a page title that repeats the nav.
+- **Images:** `ProjectImage` shows a shimmer until the image decodes, then fades it in. Project images are Sadat's own screenshots, framed by `scripts/generate-project-images.py`. Don't replace them with anything that isn't from the actual project.
+- **Spacing:** sections use `py-24 sm:py-32`. Related items within a group use 8–16px; separate groups use 32px or more.
+- **Motion = feedback:** hover nudges on arrows, press scale on buttons, "Copied" confirmation, filter re-layout, image fade-in. No looping or decorative animation.
 
 ## Theming
 
@@ -124,7 +140,7 @@ Dark-first with a light toggle (circular reveal via the View Transitions API, sa
 - **Paper** (light mode): warm paper, deep emerald, cards that lift on soft shadows, and a warm sunrise glow behind the hero.
 - **Forest**: deep green ink, used for the `theme-invert` bands in light mode. In dark mode those bands use Paper.
 
-Cards use `shadow-card` and `hover:shadow-card-hover`, and hero atmosphere uses `.bg-glow`; all three follow the palette. Colors are CSS variables (`bg`, `surface`, `elevated`, `fg`, `muted`, `subtle`, `line`, `accent`), exposed as Tailwind utilities (`bg-bg`, `text-muted`, `border-line`, ...). Always use these tokens, never raw colors, so both themes work.
+Cards use `.card` / `shadow-card` and `hover:shadow-card-hover`, and the hero glow uses `.bg-glow`; all follow the palette. Colors are CSS variables (`bg`, `surface`, `elevated`, `fg`, `muted`, `subtle`, `line`, `accent`), exposed as Tailwind utilities (`bg-bg`, `text-muted`, `border-line`, ...). Always use these tokens, never raw colors, so both themes work.
 
 Add `theme-invert` (with `bg-bg text-fg`) to any element to render it in the opposite palette. This creates the contrast bands on the home page. Don't use Tailwind's `invert` class for this; it's a CSS filter.
 
